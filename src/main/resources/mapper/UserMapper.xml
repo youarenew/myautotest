@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wywk.myautotest.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wywk.myautotest.entity.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_no" jdbcType="VARCHAR" property="userNo" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, comment, create_time, mobile, role, status, update_time, user_name, user_no, 
+    password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.wywk.myautotest.entity.User">
+    insert into t_user (comment, create_time,
+      mobile, role, status, 
+      update_time, user_name, user_no, 
+      password)
+    values (#{comment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{mobile,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{userName,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wywk.myautotest.entity.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userNo != null">
+        user_no,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wywk.myautotest.entity.User">
+    update t_user
+    <set>
+      <if test="comment != null and comment.length()>0">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null and updateTime.length()>0">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null and mobile.length()>0">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null and role.length()>0">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status>0">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null and userName.length()>0">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null and userNo.length()>0">
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password.length()>0">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wywk.myautotest.entity.User">
+    update t_user
+    set comment = #{comment,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_no = #{userNo,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAll" resultType="com.wywk.myautotest.entity.User">
+        SELECT * FROM t_user
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM t_user
+  </select>
+
+</mapper>

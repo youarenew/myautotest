@@ -1,0 +1,37 @@
+version: "3"
+ network:
+  - myapp
+services:
+
+ container_name: attest
+ environment:
+  HOST_HOSTNAME: $HOSTNAME
+  SPRING_DATASOURCE_URL: jdbc:mysql://${MS_MYSQL_HOST}:${MS_MYSQL_PORT}/${MS_MYSQL_DB}?autoReconnect=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+  SPRING_DATASOURCE_USERNAME: ${MS_MYSQL_USER}
+  SPRING_DATASOURCE_PASSWORD: ${MS_MYSQL_PASSWORD}
+  SESSION_TIMEOUT: 7200
+ myapp:
+  build: attest
+  networks:
+   - myapp
+  depends_on:
+   - 
+  ports:
+   - "8080":"8080"
+ db:
+  image: "mysql:5.7"
+  networks:
+   - myapp
+  environment:
+   MYSQL_ROOT_PASSWORD: rootpassword
+   MYSQL_USERNAME: root
+   MYSQL_PASSWORD: root@2020
+  volumes:
+   $PWD/data:
+ redis:
+  image: "redis"
+  networks:
+   - myapp
+  volumes: 
+   - $PWD/redis/conf
+   - $PWD/redis/data

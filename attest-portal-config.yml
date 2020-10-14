@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: attest-portal-config
+data:
+  SPRING_PROFILES_ACTIVE: "uat"
+  SERVER_PORT: "8080"
+  ATTEST_JDBC_URL: jdbc:mysql://192.168.10.153:3306/my_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  MALL_JDBC_USERNAME: "root"
+  MALL_JDBC_PASSWORD: "yvip2017"
+  MALL_REDIS_HOST: "192.168.10.154"
+  MALL_REDIS_PORT: "6379"
+  MALL_REDIS_PASSWORD: ""
+
